@@ -19,7 +19,7 @@ public class ItemPedido {
     private Pedido pedidoId;
 
     @ManyToOne @JoinColumn(name = "idProducto",nullable = false)
-    private Product productoId;
+    private Producto productoId;
 
     private Integer cantidad;
     private Double precioUnitario;

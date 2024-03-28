@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class Product {
+public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
