@@ -9,8 +9,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ItemPedidoRepository extends JpaRepository<ItemPedido,Long> {
+    /*
     List<ItemPedido> findByPedidoId(Pedido pedidoId);
     List<ItemPedido> findByProductoId(Producto productoId);
     @Query("SELECT SUM(i.cantidad) FROM ItemPedido i WHERE i.productoId=:producto")
     Integer totalVentasDeProducto(Producto producto);
+
+     */
 }

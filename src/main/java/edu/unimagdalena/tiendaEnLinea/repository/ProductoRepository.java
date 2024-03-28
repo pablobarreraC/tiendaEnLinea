@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface ProductoRepository extends JpaRepository<Producto,Long> {
     List<Producto> findByNombreContainingIgnoreCase(String terminoBusqueda);
-    @Query(value = "SELECT p FROM Product p WHERE p.stock > 0")
+
+    @Query(value = "SELECT p FROM Producto p WHERE p.stock > 0")
     List<Producto> findByStockIsGreaterThanZero();
+
+    @Query("SELECT p FROM Producto p WHERE p.price=:price AND p.stock=:stock")
     List<Producto> findByPriceLessOrEqualsThanAndStockIs(Double price, Integer stock);
 }
