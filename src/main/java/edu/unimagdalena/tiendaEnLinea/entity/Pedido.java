@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +23,7 @@ public class Pedido {
     @ManyToOne @JoinColumn(name="idCliente",nullable = false)
     private Cliente clienteId;
 
-    @OneToMany(mappedBy = "pedidoId",orphanRemoval = true)
+    @OneToMany(mappedBy = "pedidoId",orphanRemoval = true,fetch = FetchType.EAGER)
     private List<ItemPedido> itemsPedido;
 
     @OneToOne(mappedBy = "pedidoId",orphanRemoval = true)
