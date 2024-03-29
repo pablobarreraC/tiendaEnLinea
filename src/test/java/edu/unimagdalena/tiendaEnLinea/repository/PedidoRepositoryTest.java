@@ -22,13 +22,10 @@ class PedidoRepositoryTest extends plantillaTestIntegracionPersistencia {
     PedidoRepository pedidoRepository;
     ClienteRepository clienteRepository;
 
-    ProductoRepository productoRepository;
     @Autowired
-    public PedidoRepositoryTest(PedidoRepository pedidoRepository,ClienteRepository clienteRepository,
-                                ProductoRepository productoRepository) {
+    public PedidoRepositoryTest(PedidoRepository pedidoRepository,ClienteRepository clienteRepository) {
         this.pedidoRepository = pedidoRepository;
         this.clienteRepository=clienteRepository;
-        this.productoRepository=productoRepository;
     }
 
     List<Cliente> creacionClientes(){
@@ -77,7 +74,6 @@ class PedidoRepositoryTest extends plantillaTestIntegracionPersistencia {
     void setUp() {
         pedidoRepository.deleteAll();
         clienteRepository.deleteAll();
-        productoRepository.deleteAll();
     }
 
     @Test
