@@ -22,10 +22,18 @@ class PedidoRepositoryTest extends plantillaTestIntegracionPersistencia {
     PedidoRepository pedidoRepository;
     ClienteRepository clienteRepository;
 
+    //pruebas
+    ItemPedidoRepository itemPedidoRepository;
+    ProductoRepository productoRepository;
+
     @Autowired
-    public PedidoRepositoryTest(PedidoRepository pedidoRepository,ClienteRepository clienteRepository) {
+    public PedidoRepositoryTest(PedidoRepository pedidoRepository,ClienteRepository clienteRepository,
+                                ItemPedidoRepository itemPedidoRepository,
+                                ProductoRepository productoRepository) {
         this.pedidoRepository = pedidoRepository;
         this.clienteRepository=clienteRepository;
+        this.itemPedidoRepository=itemPedidoRepository;
+        this.productoRepository=productoRepository;
     }
 
     List<Cliente> creacionClientes(){
@@ -74,6 +82,8 @@ class PedidoRepositoryTest extends plantillaTestIntegracionPersistencia {
     void setUp() {
         pedidoRepository.deleteAll();
         clienteRepository.deleteAll();
+        itemPedidoRepository.deleteAll();
+        productoRepository.deleteAll();
     }
 
     @Test
@@ -162,6 +172,20 @@ class PedidoRepositoryTest extends plantillaTestIntegracionPersistencia {
                         .clienteId(cliente)
                         .status(StatusPedido.ENVIADO).build());
         pedidoRepository.flush();
+        Producto producto=productoRepository.save(
+                Producto.builder()
+                        .nombre("Producto1")
+                        .price(25.000d)
+                        .stock(20).build());
+        productoRepository.flush();
+        ItemPedido itemPedido=itemPedidoRepository.save(
+                ItemPedido.builder()
+                        .pedidoId(pedido)
+                        .productoId(producto)
+                        .cantidad(20)
+                        .precioUnitario(2.500d)
+                        .build());
+        itemPedidoRepository.flush();
         //when
         List<Pedido> pedidos=pedidoRepository.findPedidoAndItemsPedidoByClienteId(cliente);
         //then
