@@ -3,6 +3,7 @@ package edu.unimagdalena.tiendaEnLinea.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import edu.unimagdalena.tiendaEnLinea.dto.cliente.ClienteDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -20,7 +21,7 @@ public interface PedidoService {
 
     List<PedidoDto> buscarPedidosEntreDosFecha(LocalDateTime fechaInicial,LocalDateTime fechaFinal);
 
-    List<PedidoDto> buscarPedidosPorClienteYUnEstado(Long idCliente, String statusPedido);
+    List<PedidoDto> buscarPedidosPorClienteYUnEstado(ClienteDto idCliente, String statusPedido);
 
-    List<PedidoDto> findPedidoByClienteWithItems(Long idCliente);
+    List<PedidoDto> findPedidoByClienteWithItems(ClienteDto idCliente);
 }

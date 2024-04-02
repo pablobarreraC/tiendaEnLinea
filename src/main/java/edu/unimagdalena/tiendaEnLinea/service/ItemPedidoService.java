@@ -2,8 +2,8 @@ package edu.unimagdalena.tiendaEnLinea.service;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import edu.unimagdalena.tiendaEnLinea.dto.pedido.PedidoDto;
+import edu.unimagdalena.tiendaEnLinea.dto.producto.ProductoDto;
 
 import edu.unimagdalena.tiendaEnLinea.dto.itemPedido.ItemPedidoDto;
 import edu.unimagdalena.tiendaEnLinea.dto.itemPedido.ItemPedidoToSaveDto;
@@ -18,8 +18,8 @@ public interface ItemPedidoService {
     List<ItemPedidoDto> buscarTodosItemPedidos();
 
 
-    List<ItemPedidoDto> buscarItemsDelPedidoPorPedidoId( Long idPedido);
-    List<ItemPedidoDto> buscarItemsDelPedidoParaUnProductoEspecífico(Long idProducto);
+    List<ItemPedidoDto> buscarItemsDelPedidoPorPedidoId( PedidoDto idPedido);
+    List<ItemPedidoDto> buscarItemsDelPedidoParaUnProductoEspecífico(ProductoDto idProducto);
 
-    Integer calcularLaSumaDelTotalDeVentasParaUnProducto(Long idProducto);
+    Integer calcularLaSumaDelTotalDeVentasParaUnProducto(ProductoDto idProducto);
 }

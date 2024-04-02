@@ -19,6 +19,6 @@ public interface ProductoService {
     List<ProductoDto> buscarTodosProductos();
 
     List<ProductoDto> buscarProductoPorNombre(String nombre);
-    List<ProductoDto> buscarLosProductosQueEstanEnStock(Integer stock);
+    List<ProductoDto> buscarLosProductosQueEstanEnStock();
     List<ProductoDto> buscarLosProductosQueNoSuperenUnPrecioYUnStockDeterminado(Double price,Integer stock);
 }

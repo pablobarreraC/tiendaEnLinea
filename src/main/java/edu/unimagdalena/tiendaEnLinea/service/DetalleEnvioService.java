@@ -3,6 +3,8 @@ package edu.unimagdalena.tiendaEnLinea.service;
 
 import java.util.List;
 
+import edu.unimagdalena.tiendaEnLinea.dto.pedido.PedidoDto;
+import edu.unimagdalena.tiendaEnLinea.entity.Pedido;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -20,7 +22,7 @@ public interface DetalleEnvioService {
     List<DetalleEnvioDto> buscarTodosDetallesEnvio();
 
 
-    List<DetalleEnvioDto> buscarLosDetallesDelEnvíoPorPedidoId(Long id);
+    List<DetalleEnvioDto> buscarLosDetallesDelEnvíoPorPedidoId(PedidoDto pedidoId);
     List<DetalleEnvioDto> buscarLosDetallesDelEnvíoParaUnaTrasportadora(String transportadora);
     List<DetalleEnvioDto> buscarLosDetallesDelEnvioPorStatus(String status);
 }

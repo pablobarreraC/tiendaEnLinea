@@ -2,6 +2,7 @@ package edu.unimagdalena.tiendaEnLinea.service;
 
 import java.util.List;
 
+import edu.unimagdalena.tiendaEnLinea.dto.producto.ProductoDto;
 import org.springframework.stereotype.Service;
 
 import edu.unimagdalena.tiendaEnLinea.dto.itemPedido.ItemPedidoDto;
@@ -87,7 +88,7 @@ public class ItemPedidoServiceImpl implements ItemPedidoService{
     }
 
     @Override
-    public Double calcularLaSumaDelTotalDeVentasParaUnProducto(Long idProducto) {
+    public Double calcularLaSumaDelTotalDeVentasParaUnProducto(ProductoDto idProducto) {
         return itemPedidoRepository.findTotalByProductoId(idProducto);
     }
 
