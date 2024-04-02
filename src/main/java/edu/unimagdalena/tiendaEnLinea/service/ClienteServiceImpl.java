@@ -25,9 +25,9 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public ClienteDto guardarCliente(ClienteToSaveDto clienteDto) {
-        Cliente cliente = clienteMapper.clienteSaveDtoToClienteEntity(clienteDto);
+        Cliente cliente = clienteMapper.clienteToSaveDtoToEntity(clienteDto);
         Cliente clienteGuardado = clienteRepository.save(cliente);
-        return clienteMapper.clienteEntityToClienteDto(clienteGuardado);
+        return clienteMapper.clienteEntityToDto(clienteGuardado);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ClienteServiceImpl implements ClienteService{
         clienteInDb.setDireccion(clienteDto.direccion());
         Cliente clienteGuardado = clienteRepository.save(clienteInDb);
         
-        return clienteMapper.clienteEntityToClienteDto(clienteGuardado);
+        return clienteMapper.clienteEntityToDto(clienteGuardado);
     }
 
 
@@ -47,7 +47,7 @@ public class ClienteServiceImpl implements ClienteService{
     public ClienteDto buscarClientePorId(Long id) throws ClienteNotFoundException{
        Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new ClienteNotFoundException("Cliente no encontrado"));
-        return clienteMapper.clienteEntityToClienteDto(cliente);
+        return clienteMapper.clienteEntityToDto(cliente);
     }
 
     @Override
@@ -61,17 +61,17 @@ public class ClienteServiceImpl implements ClienteService{
     public List<ClienteDto> encontrarTodosClientes() {
         List<Cliente> clientes = clienteRepository.findAll();
         return clientes.stream()
-                .map(cliente -> clienteMapper.clienteEntityToClienteDto(cliente))
+                .map(cliente -> clienteMapper.clienteEntityToDto(cliente))
                 .toList();
     }
 
     //Otros metodos
     @Override
     public ClienteDto buscarClientePorEmail(String email) throws ClienteNotFoundException {
-        Cliente cliente = clienteRepository.findClienteByEmail(email);
-        if (Objects.isNull(cliente))
+        List<Cliente> clientes = clienteRepository.findByEmail(email);
+        if (Objects.isNull(clientes.get(0)))
             throw new ClienteNotFoundException("Cliente no encontrado");
-        return clienteMapper.clienteEntityToClienteDto(cliente);
+        return clienteMapper.clienteEntityToDto(clientes.get(0));
     }
 
     @Override
@@ -80,18 +80,17 @@ public class ClienteServiceImpl implements ClienteService{
         if(clientes.isEmpty())
             throw new ClienteNotFoundException("Cliente no encontrado");
         return clientes.stream()
-                .map(cliente -> clienteMapper.clienteEntityToClienteDto(cliente))
+                .map(cliente -> clienteMapper.clienteEntityToDto(cliente))
                 .toList();
     }
 
     @Override
     public List<ClienteDto> buscarClientesPorPrimerNombre(String nombre) {
-        List<Cliente> clientes = clienteRepository.findByNameStartingWith(nombre);
+        List<Cliente> clientes = clienteRepository.findByNombreStartingWith(nombre);
         if(clientes.isEmpty())
             throw new ClienteNotFoundException("Cliente no existe");
         return clientes.stream()
-                .map(cliente -> clienteMapper.clienteEntityToClienteDto(cliente))
+                .map(cliente -> clienteMapper.clienteEntityToDto(cliente))
                 .toList();
     }
-
 }
