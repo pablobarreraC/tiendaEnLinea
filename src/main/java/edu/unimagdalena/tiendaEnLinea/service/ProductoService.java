@@ -7,8 +7,8 @@ import edu.unimagdalena.tiendaEnLinea.dto.producto.ProductoToSaveDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import edu.unimagdalena.tiendaEnLinea.dto.product.ProductDto;
-import edu.unimagdalena.tiendaEnLinea.dto.product.ProductToSaveDto;
+import edu.unimagdalena.tiendaEnLinea.dto.producto.ProductoDto;
+import edu.unimagdalena.tiendaEnLinea.dto.producto.ProductoToSaveDto;
 import edu.unimagdalena.tiendaEnLinea.excepción.ProductoNotFoundException;
 
 public interface ProductoService {
