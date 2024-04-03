@@ -1,8 +1,5 @@
 package edu.unimagdalena.tiendaEnLinea.dto.detalleEnvio;
 
-
-import edu.unimagdalena.tiendaEnLinea.dto.cliente.ClienteDto;
-import edu.unimagdalena.tiendaEnLinea.entity.Cliente;
 import edu.unimagdalena.tiendaEnLinea.entity.DetalleEnvio;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
