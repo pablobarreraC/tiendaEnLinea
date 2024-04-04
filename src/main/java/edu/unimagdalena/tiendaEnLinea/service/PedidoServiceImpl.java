@@ -1,6 +1,7 @@
 package edu.unimagdalena.tiendaEnLinea.service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -87,8 +88,15 @@ public class PedidoServiceImpl implements PedidoService{
     public List<PedidoDto> buscarPedidosPorClienteYUnEstado(ClienteDto idCliente, String status) {
         Cliente cliente=ClienteMapper.instancia.clienteDtoToEntity(idCliente);
 
+        List<StatusPedido> statusPedidoList= Arrays.asList(StatusPedido.values());
+        StatusPedido statusPedido=null;
+        for(int i=0;i<statusPedidoList.size();i++){
+            if(statusPedidoList.get(i).name().equalsIgnoreCase(status)){
+                statusPedido=statusPedidoList.get(i);
+            }
+        }
 
-        List<Pedido> pedidos = pedidoRepository.findByClienteIdAndStatusIs(cliente, status);
+        List<Pedido> pedidos = pedidoRepository.findByClienteIdAndStatusIs(cliente,statusPedido);
         if (pedidos.isEmpty()) {
             throw new PedidoNotFoundException("No se encontraron pedidos con el cliente y estado especificados");
         }

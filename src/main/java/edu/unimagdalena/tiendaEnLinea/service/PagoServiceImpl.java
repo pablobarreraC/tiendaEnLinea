@@ -58,9 +58,10 @@ public class PagoServiceImpl implements PagoService {
                 .orElseThrow(() -> new PagoNotFoundException("Pago no encontrado"));
 
         pagoInDb.setTotalPago(pagoDto.totalPago());
-        LocalDate fechaPago=pagoDto.fechaPago();
+        Pago pagoDtoFecha=pagoMapper.pagoDtoToEntity(pagoMapper.pagoToSaveDtoToDto(pagoDto));
+        LocalDate fechaPago=pagoDtoFecha.getFechaPago();
         pagoInDb.setFechaPago(LocalDate.of(fechaPago.getYear(), fechaPago.getMonthValue(), fechaPago.getDayOfMonth()));
-        pagoInDb.setMetodoPago(pagoDto.metodoPago());
+        pagoInDb.setMetodoPago(pagoDtoFecha.getMetodoPago());
 
         Pago pagoGuardado = pagoRepository.save(pagoInDb);
 
@@ -97,6 +98,5 @@ public class PagoServiceImpl implements PagoService {
                 .map(pago -> pagoMapper.pagoEntityToDto(pago))
                 .toList();
     }
-
 }
 
