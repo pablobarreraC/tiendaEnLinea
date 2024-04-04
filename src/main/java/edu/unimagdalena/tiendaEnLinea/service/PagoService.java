@@ -1,12 +1,12 @@
 package edu.unimagdalena.tiendaEnLinea.service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 import java.util.List;
 
 import edu.unimagdalena.tiendaEnLinea.dto.pago.PagoDto;
 import edu.unimagdalena.tiendaEnLinea.dto.pago.PagoToSaveDto;
 import edu.unimagdalena.tiendaEnLinea.dto.pedido.PedidoDto;
-import edu.unimagdalena.tiendaEnLinea.entity.enumEntity.MetodoPago;
 import edu.unimagdalena.tiendaEnLinea.excepción.PagoNotFoundException;
 
 public interface PagoService{
@@ -17,7 +17,7 @@ public interface PagoService{
     List<PagoDto> buscarTodosPagos();
 
     
-    List<PagoDto>recuperarPagosDentroDeUnRangoDeFecha(LocalDateTime fechaIni, LocalDateTime fechaFin);
+    List<PagoDto>recuperarPagosDentroDeUnRangoDeFecha(LocalDate fechaIni, LocalDate fechaFin);
     List<PagoDto> recuperarPagosPorUnIdentificadorDeUnaOrdenYMétodoDePago(PedidoDto idPedido, String metodoPago);
 
 }

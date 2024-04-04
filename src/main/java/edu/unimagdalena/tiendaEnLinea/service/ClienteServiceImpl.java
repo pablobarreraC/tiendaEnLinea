@@ -30,6 +30,7 @@ public class ClienteServiceImpl implements ClienteService{
         return clienteMapper.clienteEntityToDto(clienteGuardado);
     }
 
+   
     @Override
     public ClienteDto actualizarCliente(Long id, ClienteToSaveDto clienteDto){
         Cliente clienteInDb = clienteRepository.findById(id)
@@ -88,7 +89,7 @@ public class ClienteServiceImpl implements ClienteService{
     public List<ClienteDto> buscarClientesPorPrimerNombre(String nombre) {
         List<Cliente> clientes = clienteRepository.findByNombreStartingWith(nombre);
         if(clientes.isEmpty())
-            throw new ClienteNotFoundException("Cliente no existe");
+            throw new ClienteNotFoundException("Cliente no encontrado");
         return clientes.stream()
                 .map(cliente -> clienteMapper.clienteEntityToDto(cliente))
                 .toList();
