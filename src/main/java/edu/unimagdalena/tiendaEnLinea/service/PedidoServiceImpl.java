@@ -86,7 +86,7 @@ public class PedidoServiceImpl implements PedidoService{
     @Override
     public List<PedidoDto> buscarPedidosPorClienteYUnEstado(ClienteDto idCliente, String status) {
         Cliente cliente=ClienteMapper.instancia.clienteDtoToEntity(idCliente);
-    
+
 
         List<Pedido> pedidos = pedidoRepository.findByClienteIdAndStatusIs(cliente, status);
         if (pedidos.isEmpty()) {

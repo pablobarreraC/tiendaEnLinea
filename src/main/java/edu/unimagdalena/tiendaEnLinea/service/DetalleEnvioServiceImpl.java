@@ -55,7 +55,7 @@ public class DetalleEnvioServiceImpl implements DetalleEnvioService{
     }
 
     @Override
-    public void removerDetallePedido(Long id) {
+    public void removerDetalleEnvio(Long id) {
         DetalleEnvio detalleEnvio = detalleEnvioRepository.findById(id)
                 .orElseThrow(() -> new NotAbleToDeleteException("Detalle de envío no encontrado"));
         detalleEnvioRepository.delete(detalleEnvio);

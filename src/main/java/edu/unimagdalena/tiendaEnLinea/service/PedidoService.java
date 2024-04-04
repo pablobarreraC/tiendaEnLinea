@@ -4,12 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import edu.unimagdalena.tiendaEnLinea.dto.cliente.ClienteDto;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import edu.unimagdalena.tiendaEnLinea.dto.pedido.PedidoDto;
 import edu.unimagdalena.tiendaEnLinea.dto.pedido.PedidoToSaveDto;
-import edu.unimagdalena.tiendaEnLinea.entity.enumEntity.StatusPedido;
 import edu.unimagdalena.tiendaEnLinea.excepción.PedidoNotFoundException;
 
 public interface PedidoService {

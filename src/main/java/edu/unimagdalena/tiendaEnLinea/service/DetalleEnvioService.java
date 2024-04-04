@@ -17,7 +17,7 @@ public interface DetalleEnvioService {
     DetalleEnvioDto guardarDetalleEnvio(DetalleEnvioToSaveDto detalleEnvio);
     DetalleEnvioDto actualizarDetalleEnvioPorId(Long id, DetalleEnvioToSaveDto detalleEnvio);
     DetalleEnvioDto buscarDetalleEnvioPorId(Long id) throws DetalleEnvioNotFoundException;
-    void removerDetallePedido(Long id);
+    void removerDetalleEnvio(Long id);
 
     List<DetalleEnvioDto> buscarTodosDetallesEnvio();
 
