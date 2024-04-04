@@ -20,7 +20,6 @@ import edu.unimagdalena.tiendaEnLinea.repository.PedidoRepository;
 
 @Service
 public class PedidoServiceImpl implements PedidoService{
-  
      private final PedidoMapper pedidoMapper;
     private final PedidoRepository pedidoRepository;
 
