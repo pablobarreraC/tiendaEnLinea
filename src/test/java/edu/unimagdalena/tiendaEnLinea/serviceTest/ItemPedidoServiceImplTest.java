@@ -3,8 +3,12 @@ package edu.unimagdalena.tiendaEnLinea.serviceTest;
 import static org.junit.Assert.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +21,7 @@ import edu.unimagdalena.tiendaEnLinea.dto.itemPedido.ItemPedidoDto;
 import edu.unimagdalena.tiendaEnLinea.dto.itemPedido.ItemPedidoMapper;
 import edu.unimagdalena.tiendaEnLinea.dto.itemPedido.ItemPedidoToSaveDto;
 import edu.unimagdalena.tiendaEnLinea.entity.ItemPedido;
+import edu.unimagdalena.tiendaEnLinea.entity.Producto;
 import edu.unimagdalena.tiendaEnLinea.repository.ItemPedidoRepository;
 import edu.unimagdalena.tiendaEnLinea.service.ItemPedidoServiceImpl;
 
@@ -52,40 +57,93 @@ public class ItemPedidoServiceImplTest {
 
     @Test
     void testActualizarItemPedidoPorId() {
+        Long idItemPedido = 1l;
+
+        ItemPedidoToSaveDto itemPedidoToSaveDto = new ItemPedidoToSaveDto(
+                3L,
+                null,
+                null,
+                20,
+                29.00
+        );
+
+        when(itemPedidoRepository.findById(idItemPedido)).thenReturn(Optional.of(itemPedido));
+        when(itemPedidoRepository.save(any())).thenReturn(itemPedido);
+
+        when(itemPedidoMapper.itemPedidoEntityToDto(any())).thenReturn(itemPedidoDto);
+
+        ItemPedidoDto itemPedidoDto = itemPedidoService.actualizarItemPedidoPorId(idItemPedido, itemPedidoToSaveDto);
+
+        assertThat(itemPedidoDto).isNotNull();
 
     }
 
     @Test
     void testBuscarItemPedidoPorId() {
-        Long idItem = 1l;
+        Long idItemPedido = 1l;
 
-        when(itemPedidoRepository.findById(idItem)).thenReturn(itemPedido);
+        when(itemPedidoRepository.findById(idItemPedido)).thenReturn(Optional.of(itemPedido));
 
-        when(itemPedidoMapper.toDto(any())).thenReturn(itemPedidoDto);
+        when(itemPedidoMapper.itemPedidoEntityToDto(any())).thenReturn(itemPedidoDto);
 
-        ItemPedidoDto itemDtoG = itemPedidoService.buscarItemPedidoPorId(idItem);
+        ItemPedidoDto itemPedidoDto = itemPedidoService.buscarItemPedidoPorId(idItemPedido);
 
-        assertThat(itemDtoG).isNotNull();
+        assertThat(itemPedidoDto).isNotNull();
 
     }
 
+
     @Test
     void testBuscarItemsDelPedidoParaUnProductoEspecífico() {
+        String nombreProducto = "Laptop";
+        List<ItemPedido> itemPedidoList = List.of(itemPedido,itemPedido2);
+
+        when(itemPedidoRepository.findByPedidoId(nombreProducto)).thenReturn(itemPedidoList);
+
+        List<ItemPedidoDto> itemPedidoDtoList = itemPedidoService.buscarItemsDelPedidoParaUnProductoEspecífico(nombreProducto);
+
+        assertThat(itemPedidoDtoList).isNotEmpty();
+        assertThat(itemPedidoDtoList).hasSize(1);
 
     }
 
     @Test
     void testBuscarItemsDelPedidoPorPedidoId() {
+        Long idPedido=1l;
+
+        List<ItemPedido> itemPedidoList = List.of(itemPedido,itemPedido2);
+
+        when(itemPedidoRepository.findByPedidoId(idPedido)).thenReturn(itemPedidoList);
+
+        List<ItemPedidoDto> itemPedidoDtoTotal = itemPedidoService.buscarItemsDelPedidoPorPedidoId(idPedido);
+
+        assertThat(itemPedidoDtoTotal).isNotEmpty();
+        assertThat(itemPedidoDtoTotal).hasSize(1);
+
 
     }
 
     @Test
     void testBuscarTodosItemPedidos() {
+        List<ItemPedido> itemPedidoList = List.of(itemPedido, itemPedido2);
+
+        when(itemPedidoRepository.findAll()).thenReturn(itemPedidoList);
+
+        List<ItemPedidoDto> itemPedidoDtoTotal = itemPedidoService.buscarTodosItemPedidos();
+
+        assertThat(itemPedidoDtoTotal).isNotEmpty();
+        assertThat(itemPedidoDtoTotal).hasSize(2);
+
 
     }
 
     @Test
     void testCalcularLaSumaDelTotalDeVentasParaUnProducto() {
+        Producto producto = new Producto(null, null, null, null, null)
+
+        when(itemPedidoRepository.calcularTotalVentasDeProducto(producto)).thenReturn(itemPedido.getCantidad());
+        Double total = itemPedidoService.calcularLaSumaDelTotalDeVentasParaUnProducto(producto);
+        assertThat(total).isEqualTo(20000.0);
 
     }
 
@@ -109,6 +167,13 @@ public class ItemPedidoServiceImplTest {
 
     @Test
     void testRemoverItemPedido() {
+          Long idItemPedido = 1l;
+
+        when(itemPedidoRepository.findById(idItemPedido)).thenReturn(Optional.of(itemPedido));
+
+        itemPedidoService.removerItemPedido(idItemPedido);
+
+        verify(itemPedidoRepository, times(1)).delete(itemPedido);
 
     }
 }

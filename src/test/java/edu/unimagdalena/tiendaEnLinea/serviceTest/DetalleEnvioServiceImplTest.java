@@ -6,6 +6,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,13 +16,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Null;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import edu.unimagdalena.tiendaEnLinea.dto.detalleEnvio.DetalleEnvioDto;
 import edu.unimagdalena.tiendaEnLinea.dto.detalleEnvio.DetalleEnvioMapper;
 import edu.unimagdalena.tiendaEnLinea.dto.detalleEnvio.DetalleEnvioToSaveDto;
+import edu.unimagdalena.tiendaEnLinea.dto.itemPedido.ItemPedidoDto;
 import edu.unimagdalena.tiendaEnLinea.entity.DetalleEnvio;
+import edu.unimagdalena.tiendaEnLinea.entity.ItemPedido;
 import edu.unimagdalena.tiendaEnLinea.entity.Pedido;
+import edu.unimagdalena.tiendaEnLinea.entity.enumEntity.StatusPedido;
 import edu.unimagdalena.tiendaEnLinea.repository.DetalleEnvioRepository;
 import edu.unimagdalena.tiendaEnLinea.service.DetalleEnvioServiceImpl;
 
@@ -41,9 +47,8 @@ public class DetalleEnvioServiceImplTest {
 
     @BeforeEach
     void setUp() {
+        Pedido pedido= new Pedido(1l, null,new ArrayList<ItemPedido>(),null,detalleEnvio,LocalDateTime.now().toString(), StatusPedido.ENVIADO);
         //detalleEnvio = new DetalleEnvio();
-        pedido.setDetalleEnvio(detalleEnvio);
-        pedido.setId(1l);
         detalleEnvio.setId(1L);
         detalleEnvio.setDireccion("Calle 2");
         detalleEnvio.setNumeroGuia("345");
@@ -127,6 +132,7 @@ public class DetalleEnvioServiceImplTest {
 
     @Test
     void testBuscarLosDetallesDelEnvíoPorPedidoId() {
+    
     }
     
 
